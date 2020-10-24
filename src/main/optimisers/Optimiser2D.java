@@ -43,7 +43,6 @@ public class Optimiser2D {
     intersections =
         intersections.stream().filter(this::withinFeasibleRegion).collect(Collectors.toList());
 
-    System.out.println(intersections);
 
     Pair<Coordinate, Double> optimalSolution = getOptimalSolution(intersections);
 
@@ -75,6 +74,7 @@ public class Optimiser2D {
     return new Pair<>(solution.getFirst(), solution.getSecond());
   }
 
+  /* Returns the optimal coordinate and value from a list of coordinates */
   private Pair<Coordinate, Double> getOptimalSolution(List<Coordinate> coordinates) {
     Coordinate optimalCoordinate = null;
     double optimalValue;
@@ -101,6 +101,7 @@ public class Optimiser2D {
     return new Pair<>(optimalCoordinate, optimalValue);
   }
 
+  /* Checks if a coordinate is within the feasible region defined by the constraints */
   private boolean withinFeasibleRegion(Coordinate coord) {
     for (Constraint2D constraint : constraints) {
       if (!constraint.evaluate(coord)) {

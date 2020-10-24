@@ -19,12 +19,8 @@ public class Constraint2D extends Constraint {
   /* Checks if a Coordinate satisfies the constraint  */
   public boolean evaluate(Coordinate coord) {
     switch (getSign()) {
-      case LESS_THAN:
-        return getYCoefficient() * coord.getY() < - getXCoefficient() * coord.getX() + getConstant();
       case LESS_THAN_OR_EQUAL:
         return getYCoefficient() * coord.getY() <= - getXCoefficient() * coord.getX() + getConstant();
-      case GREATER_THAN:
-        return getYCoefficient() * coord.getY() > - getXCoefficient() * coord.getX() + getConstant();
       case GREATER_THAN_OR_EQUAL:
         return getYCoefficient() * coord.getY() >= - getXCoefficient() * coord.getX() + getConstant();
       case EQUAL:
@@ -47,15 +43,10 @@ public class Constraint2D extends Constraint {
 
     try {
       double xCoeff = -(x1 / (double) y1) + (x2 / (double) y2);
-      checkNotZeroDivisionError(xCoeff);
-
       double constVal = (getConstant() / (double) y1) - (other.getConstant() / (double) y2);
-      checkNotZeroDivisionError(constVal);
-
       double xVal = - constVal / xCoeff;
-      checkNotZeroDivisionError(xVal);
-
       double yVal = evaluateAsLine(xVal);
+
       checkNotZeroDivisionError(yVal);
 
       return xVal < 0 || yVal < 0 ? null : new Coordinate(xVal, yVal);
