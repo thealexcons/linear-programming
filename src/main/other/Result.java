@@ -1,10 +1,10 @@
 package main.other;
 
-public class Pair<E, T> {
+public class Result<E, T> {
   private final E first;
   private final T second;
 
-  public Pair(E first, T second) {
+  public Result(E first, T second) {
     this.first = first;
     this.second = second;
   }

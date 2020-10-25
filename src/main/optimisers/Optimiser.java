@@ -1,4 +1,8 @@
 package main.optimisers;
 
-public class Optimiser {
+import main.other.Result;
+
+public interface Optimiser {
+
+  Result solve();
 }

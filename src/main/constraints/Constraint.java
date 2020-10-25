@@ -1,7 +1,5 @@
 package main.constraints;
 
-import java.util.Arrays;
-
 public class Constraint {
 
     protected final ConstraintSign sign;

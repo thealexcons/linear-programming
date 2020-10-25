@@ -2,15 +2,15 @@ package main.optimisers;
 
 import main.constraints.Constraint2D;
 import main.objective_functions.ObjectiveFunction2D;
-import main.other.Coordinate;
-import main.other.Pair;
+import main.other.Coordinate2D;
+import main.other.Result;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Optimiser2D {
+public class Optimiser2D implements Optimiser {
 
   private final ObjectiveFunction2D objectiveFunction;
   private final OptimisationType optimisationType;
@@ -26,13 +26,13 @@ public class Optimiser2D {
   }
 
   /* Solves a 2D linear programming problem, returning the optimal coordinate and optimal value */
-  public Pair<Coordinate, Double> solve() {
+  public Result<Coordinate2D, Double> solve() {
 
     // Find coordinates of all the intersections of the constraints as linear functions
-    List<Coordinate> intersections = new ArrayList<>();
+    List<Coordinate2D> intersections = new ArrayList<>();
     for (int i = 0; i < constraints.length; i++) {
       for (int j = i + 1; j < constraints.length; j++) {
-        Coordinate coord = constraints[i].intersectionWith(constraints[j]);
+        Coordinate2D coord = constraints[i].intersectionWith(constraints[j]);
         if (coord != null) {
           intersections.add(coord);
         }
@@ -44,7 +44,7 @@ public class Optimiser2D {
         intersections.stream().filter(this::withinFeasibleRegion).collect(Collectors.toList());
 
 
-    Pair<Coordinate, Double> optimalSolution = getOptimalSolution(intersections);
+    Result<Coordinate2D, Double> optimalSolution = getOptimalSolution(intersections);
 
     if (integerOnly) {
       return getOptimalIntegerSolution(optimalSolution.getFirst());
@@ -54,33 +54,33 @@ public class Optimiser2D {
   }
 
   /* Checks the four integer points around the given coordinate and returns the optimal one */
-  private Pair<Coordinate, Double> getOptimalIntegerSolution(Coordinate optimalCoordinate) {
-    List<Coordinate> integerCoords =
+  private Result<Coordinate2D, Double> getOptimalIntegerSolution(Coordinate2D optimalCoordinate) {
+    List<Coordinate2D> integerCoords =
         Arrays.asList(
-            new Coordinate(
+            new Coordinate2D(
                 Math.ceil(optimalCoordinate.getX()), Math.ceil(optimalCoordinate.getY())),
-            new Coordinate(
+            new Coordinate2D(
                 Math.ceil(optimalCoordinate.getX()), Math.floor(optimalCoordinate.getY())),
-            new Coordinate(
+            new Coordinate2D(
                 Math.floor(optimalCoordinate.getX()), Math.ceil(optimalCoordinate.getY())),
-            new Coordinate(
+            new Coordinate2D(
                 Math.floor(optimalCoordinate.getX()), Math.floor(optimalCoordinate.getY())));
 
     integerCoords =
         integerCoords.stream().filter(this::withinFeasibleRegion).collect(Collectors.toList());
 
-    Pair<Coordinate, Double> solution = getOptimalSolution(integerCoords);
+    Result<Coordinate2D, Double> solution = getOptimalSolution(integerCoords);
 
-    return new Pair<>(solution.getFirst(), solution.getSecond());
+    return new Result<>(solution.getFirst(), solution.getSecond());
   }
 
   /* Returns the optimal coordinate and value from a list of coordinates */
-  private Pair<Coordinate, Double> getOptimalSolution(List<Coordinate> coordinates) {
-    Coordinate optimalCoordinate = null;
+  private Result<Coordinate2D, Double> getOptimalSolution(List<Coordinate2D> coordinates) {
+    Coordinate2D optimalCoordinate = null;
     double optimalValue;
     if (optimisationType == OptimisationType.MINIMISE) {
       optimalValue = Double.POSITIVE_INFINITY;
-      for (Coordinate coord : coordinates) {
+      for (Coordinate2D coord : coordinates) {
         double val = objectiveFunction.evaluate(coord);
         if (val < optimalValue) {
           optimalValue = val;
@@ -89,7 +89,7 @@ public class Optimiser2D {
       }
     } else {
       optimalValue = Double.NEGATIVE_INFINITY;
-      for (Coordinate coord : coordinates) {
+      for (Coordinate2D coord : coordinates) {
         double val = objectiveFunction.evaluate(coord);
         if (val > optimalValue) {
           optimalValue = val;
@@ -98,11 +98,11 @@ public class Optimiser2D {
       }
     }
 
-    return new Pair<>(optimalCoordinate, optimalValue);
+    return new Result<>(optimalCoordinate, optimalValue);
   }
 
   /* Checks if a coordinate is within the feasible region defined by the constraints */
-  private boolean withinFeasibleRegion(Coordinate coord) {
+  private boolean withinFeasibleRegion(Coordinate2D coord) {
     for (Constraint2D constraint : constraints) {
       if (!constraint.evaluate(coord)) {
         return false;

@@ -14,4 +14,8 @@ public class ObjectiveFunction {
     }
     return total;
   }
+
+  public int[] getCoefficients() {
+    return coefficients;
+  }
 }

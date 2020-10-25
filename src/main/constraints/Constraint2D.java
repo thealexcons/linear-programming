@@ -1,6 +1,6 @@
 package main.constraints;
 
-import main.other.Coordinate;
+import main.other.Coordinate2D;
 
 public class Constraint2D extends Constraint {
 
@@ -17,7 +17,7 @@ public class Constraint2D extends Constraint {
   }
 
   /* Checks if a Coordinate satisfies the constraint  */
-  public boolean evaluate(Coordinate coord) {
+  public boolean evaluate(Coordinate2D coord) {
     switch (getSign()) {
       case LESS_THAN_OR_EQUAL:
         return getYCoefficient() * coord.getY() <= - getXCoefficient() * coord.getX() + getConstant();
@@ -30,15 +30,15 @@ public class Constraint2D extends Constraint {
   }
 
   /* Returns coordinate of intersection with another constraint (treated as line) or null if they do not meet */
-  public Coordinate intersectionWith(Constraint2D other) {
+  public Coordinate2D intersectionWith(Constraint2D other) {
     int x1 = getXCoefficient(), x2 = other.getXCoefficient();
     int y1 = getYCoefficient(), y2 = other.getYCoefficient();
 
     // Check edge case where one of the functions is a vertical line, of the form x = k
     if (getYCoefficient() == 0) {
-      return new Coordinate(getConstant(), other.evaluateAsLine(getConstant()));
+      return new Coordinate2D(getConstant(), other.evaluateAsLine(getConstant()));
     } else if (other.getYCoefficient() == 0) {
-      return new Coordinate(other.getConstant(), evaluateAsLine(other.getConstant()));
+      return new Coordinate2D(other.getConstant(), evaluateAsLine(other.getConstant()));
     }
 
     try {
@@ -49,7 +49,7 @@ public class Constraint2D extends Constraint {
 
       checkNotZeroDivisionError(yVal);
 
-      return xVal < 0 || yVal < 0 ? null : new Coordinate(xVal, yVal);
+      return xVal < 0 || yVal < 0 ? null : new Coordinate2D(xVal, yVal);
     } catch (ArithmeticException e) {
       return null;
     }
