@@ -1,17 +1,16 @@
-package main.optimisers;
+package jlinprog.optimisers;
 
-import main.constraints.Constraint;
-import main.constraints.ConstraintSign;
-import main.objective_functions.ObjectiveFunction;
-import main.other.Result;
-import main.other.Vector;
+import jlinprog.constraints.Constraint;
+import jlinprog.constraints.ConstraintSign;
+import jlinprog.objective_functions.ObjectiveFunction;
+import jlinprog.other.Result;
+import jlinprog.other.Vector;
 
 import java.util.Arrays;
 
 public class OptimiserSimplex implements Optimiser {
 
   private final ObjectiveFunction objectiveFunction;
-//  private final OptimisationType optimisationType;
   private final Constraint[] constraints;
   private final boolean showProcess;
 
@@ -25,7 +24,6 @@ public class OptimiserSimplex implements Optimiser {
       Constraint[] constraints,
       boolean showProcess) {
     this.objectiveFunction = objectiveFunction;
-//    this.optimisationType = optimisationType;
     this.constraints = constraints;
     this.showProcess = showProcess;
     assert optimisationType == OptimisationType.MAXIMISE; // simplex method only solves max problems
@@ -94,6 +92,12 @@ public class OptimiserSimplex implements Optimiser {
 
       if(showProcess) System.out.println("\n----------------------\n");
       iter++;
+    }
+
+    if (showProcess) {
+        System.out.println("-----END TABLE -----");
+        System.out.println("Table:");
+        printTableau(table, rows, cols);
     }
 
     double[] resultValues = new double[cols - 1];

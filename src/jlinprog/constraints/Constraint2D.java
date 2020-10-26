@@ -1,6 +1,6 @@
-package main.constraints;
+package jlinprog.constraints;
 
-import main.other.Coordinate2D;
+import jlinprog.other.Coordinate2D;
 
 public class Constraint2D extends Constraint {
 

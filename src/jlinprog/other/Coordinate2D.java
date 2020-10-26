@@ -1,6 +1,4 @@
-package main.other;
-
-import java.util.Arrays;
+package jlinprog.other;
 
 public class Coordinate2D {
     private final double x;

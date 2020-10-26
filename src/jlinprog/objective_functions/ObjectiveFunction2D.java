@@ -1,6 +1,6 @@
-package main.objective_functions;
+package jlinprog.objective_functions;
 
-import main.other.Coordinate2D;
+import jlinprog.other.Coordinate2D;
 
 public class ObjectiveFunction2D extends ObjectiveFunction {
 

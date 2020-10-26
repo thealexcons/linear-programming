@@ -1,13 +1,13 @@
 package test;
 
-import main.constraints.Constraint;
-import main.constraints.ConstraintSign;
-import main.objective_functions.ObjectiveFunction;
-import main.optimisers.OptimisationType;
-import main.optimisers.OptimiserSimplex;
+import jlinprog.constraints.Constraint;
+import jlinprog.constraints.ConstraintSign;
+import jlinprog.objective_functions.ObjectiveFunction;
+import jlinprog.optimisers.OptimisationType;
+import jlinprog.optimisers.OptimiserSimplex;
 
-import main.other.Result;
-import main.other.Vector;
+import jlinprog.other.Result;
+import jlinprog.other.Vector;
 import org.junit.Assert;
 import org.junit.Test;
 

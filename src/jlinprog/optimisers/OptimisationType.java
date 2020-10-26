@@ -1,4 +1,4 @@
-package main.optimisers;
+package jlinprog.optimisers;
 
 public enum OptimisationType {
   MAXIMISE,

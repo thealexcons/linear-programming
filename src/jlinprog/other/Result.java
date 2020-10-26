@@ -1,4 +1,4 @@
-package main.other;
+package jlinprog.other;
 
 public class Result<E, T> {
   private final E first;

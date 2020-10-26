@@ -1,12 +1,12 @@
 package test;
 
-import main.constraints.Constraint2D;
-import main.constraints.ConstraintSign;
-import main.objective_functions.ObjectiveFunction2D;
-import main.optimisers.OptimisationType;
-import main.optimisers.Optimiser2D;
-import main.other.Coordinate2D;
-import main.other.Result;
+import jlinprog.constraints.Constraint2D;
+import jlinprog.constraints.ConstraintSign;
+import jlinprog.objective_functions.ObjectiveFunction2D;
+import jlinprog.optimisers.OptimisationType;
+import jlinprog.optimisers.Optimiser2D;
+import jlinprog.other.Coordinate2D;
+import jlinprog.other.Result;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,9 +1,9 @@
-package main.optimisers;
+package jlinprog.optimisers;
 
-import main.constraints.Constraint2D;
-import main.objective_functions.ObjectiveFunction2D;
-import main.other.Coordinate2D;
-import main.other.Result;
+import jlinprog.constraints.Constraint2D;
+import jlinprog.objective_functions.ObjectiveFunction2D;
+import jlinprog.other.Coordinate2D;
+import jlinprog.other.Result;
 
 import java.util.ArrayList;
 import java.util.Arrays;

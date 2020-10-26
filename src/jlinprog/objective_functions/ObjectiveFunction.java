@@ -1,4 +1,4 @@
-package main.objective_functions;
+package jlinprog.objective_functions;
 
 public class ObjectiveFunction {
   protected final int[] coefficients;

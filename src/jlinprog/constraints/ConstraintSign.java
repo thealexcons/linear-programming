@@ -1,4 +1,4 @@
-package main.constraints;
+package jlinprog.constraints;
 
 public enum ConstraintSign {
     LESS_THAN_OR_EQUAL,

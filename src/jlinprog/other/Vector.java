@@ -1,4 +1,4 @@
-package main.other;
+package jlinprog.other;
 
 import java.util.Arrays;
 
