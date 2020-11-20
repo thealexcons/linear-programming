@@ -10,7 +10,7 @@ Currently supports:
     - Still being tested
     
 Todo:
-- Finish simplex tableau method
+- More unit tests for simplex tableau method
 - Add graphing feature for 2D problems
 
 
